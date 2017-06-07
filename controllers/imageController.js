@@ -1,12 +1,13 @@
 var imageHelper = require('../helpers/image'),
-    testImage = 'http://media-cdn.holidaycheck.com/ugc/images/1ee38533-f439-38e9-8ef2-41c86c1cffa7.jpg';
+    testImage = 'http://orig01.deviantart.net/92d3/f/2010/110/7/2/pla_sf_3_by_recon071.jpg';
 
 exports.image = (req, res) => {
   imageHelper.resizeImage(testImage, [
-    [100, 100]
+    [2000, 2000]
   ])
-  .then((thumbnailPaths) => console.log('DONE', thumbnailPaths))
+  .then((thumbnailPaths) => res.send('<img src="http://storage.googleapis.com/tudor-filipovici/output-2000x2000.jpg">'))
   .catch((err)=>console.log(err));
+
 }
 
 /**

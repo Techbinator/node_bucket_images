@@ -32,10 +32,13 @@ exports.resizeImage = (imageUri, sizes) => {
     return new Promise((resolve, reject) => {
       var outPath = `output-${ size[0] }x${ size[1] }.jpg`;
       console.log('WRITING', outPath);
-      var writeStream = gcs.file(outPath).createWriteStream();;
+      var opts = { public: true };
+      var writeStream = gcs.file(outPath).createWriteStream(opts);
       downloadStream.pipe(resizeTransform).pipe(writeStream);
       downloadStream.on('end', () => resolve(outPath));
       writeStream.on('error', reject);
+      writeStream.on('finish', () => {
+      })
       resizeTransform.on('error', reject);
     });
   }
