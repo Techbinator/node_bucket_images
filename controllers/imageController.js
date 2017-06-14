@@ -1,7 +1,7 @@
 var imageHelper = require('../helpers/image'),
     testImage = 'http://orig01.deviantart.net/92d3/f/2010/110/7/2/pla_sf_3_by_recon071.jpg';
-
 exports.image = (req, res) => {
+  // res.send('main');
   imageHelper.resizeImage(testImage, [
     [2000, 2000]
   ])
@@ -17,5 +17,10 @@ exports.image = (req, res) => {
  * @return {[type]}     [description]
  */
 exports.transformations = function(req, res){
-  res.send('retrieve images with transformations')
+  var path = req.path.split('/');
+  var transformations = path[1];
+  var url = path.splice(2).join('/');
+  imageHelper.resizeImage(url, [imageHelper.processTransformations(transformations)])
+  .then((thumbnailPaths) => res.send(`<img src="http://storage.googleapis.com/tudor-filipovici/${thumbnailPaths}">`))
+  .catch((err)=>console.log(err));
 }

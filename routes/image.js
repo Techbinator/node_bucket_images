@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     q -> quality
 
  */
-router.get('/w_*|h_*|c_*|q_*/*', image_controller.transformations);
+router.get('/w_*|h_*|c_*|q_*/:url', image_controller.transformations);
 
 /*
  Get images without transformations
