@@ -16,11 +16,8 @@ exports.image = (req, res) => {
  * @param  {[type]} res [response]
  * @return {[type]}     [description]
  */
-exports.transformations = function(req, res){
-  var path = req.path.split('/');
-  var transformations = path[1];
-  var url = path.splice(2).join('/');
-  imageHelper.resizeImage(url, [imageHelper.processTransformations(transformations)])
-  .then((thumbnailPaths) => res.send(`<img src="http://storage.googleapis.com/tudor-filipovici/${thumbnailPaths}">`))
+exports.transformations = (req, res) => {
+  imageHelper.transform(req.path)
+  .then((thumbnailPath) => res.send(`<img src="http://storage.googleapis.com/tudor-filipovici${thumbnailPath}">`))
   .catch((err)=> res.send('Error fetching file'));
 }

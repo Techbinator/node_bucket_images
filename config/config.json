@@ -2,5 +2,6 @@
   "gCloud": {
     "projectId": "api-project-423787997351",
     "bucket"   : "tudor-filipovici"
-  }
+  },
+  "imageBase": "http://media-cdn.holidaycheck.com/"
 }
